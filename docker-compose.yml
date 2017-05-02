@@ -14,7 +14,7 @@ services:
   mysql:
     image: mysql:5.6
     environment:
-      MYSQL_ROOT_PASSWORD: <root password>
+      MYSQL_ROOT_PASSWORD: rootPassword
       MYSQL_DATABASE: whatever
       MYSQL_USER: userman
       MYSQL_PASSWORD: isFantastic!
