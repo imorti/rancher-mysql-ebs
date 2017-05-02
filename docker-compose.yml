@@ -1,0 +1,28 @@
+version: '2'
+volumes:
+  mysql-test:
+    external: true
+    driver: ebs-driver
+services:
+  mysql-lb:
+    image: rancher/lb-service-haproxy:v0.6.2
+    ports:
+    - 3306:3306/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+  mysql:
+    image: mysql:5.6
+    environment:
+      MYSQL_ROOT_PASSWORD: <root password>
+      MYSQL_DATABASE: whatever
+      MYSQL_USER: userman
+      MYSQL_PASSWORD: isFantastic!
+    stdin_open: true
+    volumes:
+    - mysql-test:/var/lib/mysql
+    tty: true
+    ports:
+    - 3306:3306/tcp
+    labels:
+      io.rancher.container.pull_image: always
